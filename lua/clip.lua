@@ -1,3 +1,11 @@
+local LogFile = nil;
+local function Log(str)
+    if not LogFile then
+        LogFile = assert(io.open("log.txt", "w"));
+    end
+    LogFile:write(str .. "\n");
+end
+
 local function GetClippings()
     local filename = "My Clippings.txt";
     local f = assert(io.open(filename,"r"));
@@ -48,7 +56,7 @@ local function ConvertClipToBook(clip)
                 curBooks = {};
                 books[title] = curBooks;
                 books[#books + 1] = title;
-                print("new book: " .. title);
+                Log("[new book]: " .. title);
             end 
         elseif idxM == 2 then
             --
@@ -58,6 +66,8 @@ local function ConvertClipToBook(clip)
             context = clip[idx]; 
             if context ~= "" then
                 curBooks[#curBooks + 1] = context;
+
+                Log("" .. #curBooks .. ": " .. context);
             end
         end
     end
@@ -72,7 +82,8 @@ local function WriteClipBooks(books)
         title = books[idx];
         book = books[title];
 
-        file = assert(io.open(GetPathFromStr(title) .. ".txt", "w"));
+        Log("[new out]:" .. title);
+        file = assert(io.open("out/" .. GetPathFromStr(title) .. ".txt", "w"));
 
         file:write(title .. "\n");
         file:write("====\n");
@@ -82,14 +93,21 @@ local function WriteClipBooks(books)
         for idxL = 2, #book do
             line = book[idxL];
 
+            Log("==item=" .. idxL .. line);
+
+            --如果前一行与当前行不是记录的同一处，则将前一行输出
             if not IsSameHeader(preLine, line) then
                 file:write(lineIdx .. ".\t" .. preLine .. "\n");
                 lineIdx = lineIdx + 1;
-                preLine = line;
-                print("===" .. idxL);
+
+                Log("===" .. idxL);
+                Log("preLine: " .. preLine);
+                Log("line: " .. line);
             else
                 --print(idxL);
-            end   
+            end
+
+            preLine = line;
         end
         if preLine then
             file:write(lineIdx .. ".\t" .. preLine .. "\n");
@@ -98,17 +116,10 @@ local function WriteClipBooks(books)
     end
 end
 
-
-local LogFile = nil;
-local function Log(str)
-    if not LogFile then
-        LogFile = assert(io.open("log.txt", "w"));
-    end
-    LogFile:write(str .. "\n");
-end
-
 local function Main()
     Log("====start====");
+    os.execute("mkdir out");
+
     local clip = GetClippings();
     local books = ConvertClipToBook(clip);
     WriteClipBooks(books);
