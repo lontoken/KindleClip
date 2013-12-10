@@ -17,7 +17,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -74,7 +74,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ClipDomin.h" />
+    <ClInclude Include="ConvertCode.h" />
+    <ClInclude Include="CreatDir.h" />
     <ClInclude Include="KindleClip.h" />
+    <ClInclude Include="StrCoding.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ClipDomin.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="StrCoding.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

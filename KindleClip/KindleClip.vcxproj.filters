@@ -18,5 +18,28 @@
     <ClInclude Include="KindleClip.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ClipDomin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvertCode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CreatDir.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StrCoding.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ClipDomin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StrCoding.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
